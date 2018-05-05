@@ -5,12 +5,11 @@ Course Outcomes
 1. Analyse physical and astrophysical problems from the computational viewpoint. Construct mathematical and
 numerical models of many common physical and astrophysical processes while constructing appropriate logical
 approaches to physical and astrophysical solutions
-2. Master basic programming (Fortran 90/95, Makefiles). Code and implement programmes in Fortran 90/95
-3. Plot, visualize and analyse data using state-of-the-art graphic software (e.g. Gnuplot, Mathematica)
+2. Master basic programming (Python). Code and implement programmes.
+3. Plot, visualize and analyse data using state-of-the-art graphic software (e.g. numpy, matplotlib, scipy)
 4. Incorporate modern computation and visualization into the scientific problem-solving paradigm via a project
 approach.
-5. Use of state-of-the-art file editor (Emacs) for reports. Use of Latex for report preparation and formatting. Convey
-technical information with precision and concision. Communicate effectively solution methods and results using
+5. Convey technical information with precision and concision. Communicate effectively solution methods and results using
 scientific reports
 6. Assess impact of round-off and truncation errors on numerical solutions of physical processes. Grasp the
 necessary numerical analysis and its associated approximation and round-off error
