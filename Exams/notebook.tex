@@ -1,0 +1,1357 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{Final}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \section{Phys 381 Final}\label{phys-381-final}
+
+Ken Sharman
+
+April 14th, 2018
+
+Student ID \# 00300185
+
+    \subsection{Introduction}\label{introduction}
+
+We are given access to the 'Keeling Curve' dataset. This is a record of
+carbon dioxide concentrations at Mauna Loa Observatory, Hawaii. The data
+collection started in 1958 and continuous to-date.
+
+Upon first inspection, we see that there are 3 different sets for each
+measurement date; average, interpolated, and trend counts of \(C0_2\)
+expressed as a mole fraction in the dry air. The interpolated set is
+required to fill in some missing data points (see below). Note that the
+date is expressed in years only format, the months and days have been
+converted to partial years. The task at hand is to produce various fits
+for the data.
+
+While the text file includes a brief description on the interpolation
+method, it by no means goes into detail. Initially, this gave rise to
+some suspicion towards the interpolated and trend sets. After a few
+moments of consideration, it was concluded that the methods utilized by
+the group that have presented this data are without a doubt superior to
+anything I could produce at this stage of my career. However, I will
+make an effort in this area and see what I can get out of it.
+
+Firstly, we note a passage from the text file:
+
+"If there are missing days concentrated either early or late in the
+month, the monthly mean is corrected to the middle of the month using
+the average seasonal cycle. Missing months are denoted by -99.99."
+
+I will start with the average count set but will need to use some sort
+of method to interpolate the missing values.
+
+After some research {[}1{]} it appears there are a few factors to keep
+in mind when numerically interpolating between experimental values. In
+general, data fitting can be viewed as global or local. In global fits,
+a single function is used to represent the entire data set. Global
+interpolations, such as a function that passes through all data points,
+are usually not ideal. Fitting a function such that it passes through
+all points, may lead to a fit that shows nonphysical behavior. This
+leads to the general rule of thumb that if you must interpolate, keep it
+local.
+
+Assuming that the dependent variable is the function \(g(x)\), with the
+tabulated values \(g_i=g(x_i)\), and assuming that \(g(x)\) can be
+approximated as an \((n-1)\) degree polynomial, we can model the
+relationship as follows:
+
+\[g_i(x) \approx a_0+a_1x+a_2x+ \dots + a_{n-1}x^{n-1} \quad,\quad (x\approx x_i)\]
+
+To interpolate this data point we will use the closed form expression
+that directly fits this \((n-1)\) order polynomial. This is known of the
+Lagrange interpolation polynomial {[}2{]}.
+
+\[g(x) \approx g_1 \lambda_1(x)+ g_2 \lambda_2(x) + \dots + g_n \lambda_n(x)\]
+
+\[\lambda_i = \prod_{j(\neq i )=1}^{n} \dfrac{x-x_j}{x_i-x_j}\]
+
+We will try to interpolate the missing data points in the "average"
+column of the data file using the Lagrange method.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{c+c1}{\PYZsh{} Import the standard packages}
+        \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+        \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+\end{Verbatim}
+
+
+    \subsubsection{Task 1}\label{task-1}
+
+First, we will read the data in the text file (saved to disk), by
+creating an input stream. The introduction text is skipped, and each
+column of data is stored in a multi-dimensional numpy array.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{c+c1}{\PYZsh{} Retrieve the columns of data in the text file}
+        \PY{c+c1}{\PYZsh{} Sourced from: ftp://aftp.cmdl.noaa.gov/products/trends/co2/co2\PYZus{}mm\PYZus{}mlo.txt}
+        \PY{n}{filename} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{co2\PYZus{}mm\PYZus{}mlo.txt}\PY{l+s+s1}{\PYZsq{}}
+        \PY{n}{data} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{genfromtxt}\PY{p}{(} \PY{n}{filename}\PY{p}{,} \PY{n}{skip\PYZus{}header}\PY{o}{=}\PY{l+m+mi}{72}\PY{p}{,} \PY{n}{max\PYZus{}rows}\PY{o}{=}\PY{l+m+mi}{792}\PY{p}{,} \PY{n}{usecols}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{,} 
+                             \PY{n}{names}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{month}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ddate}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{average}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{interpolated}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{trend}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{p}{)}
+\end{Verbatim}
+
+
+    Now that we have the data separated into subsets, we will define a
+function that locates the missing month and another that pulls the
+surrounding data for a given month (required for the Lagrange method).
+
+As an experiment, we will use two data points before and two points
+after this missing value. There are three consecutive missing months in
+the set. We will write the function in such a way that it does not use
+surrounding values if they are missing. For simplification, these points
+will simply have 2 values to provide to the interpolation process.
+Clearly, this is not the most robust method, however it should prove to
+be a satisfactory starting point.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{k}{def} \PY{n+nf}{locateMissingMonths}\PY{p}{(}\PY{n}{dataSet}\PY{o}{=}\PY{n}{data}\PY{p}{)}\PY{p}{:}
+            \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}}
+        \PY{l+s+sd}{    Function checks a data set for entries equal to \PYZhy{}99.99, which indicates a missing data point.}
+        \PY{l+s+sd}{    A list of indices corresponding to the missing values is returned.}
+        \PY{l+s+sd}{    }
+        \PY{l+s+sd}{    Parameters:}
+        \PY{l+s+sd}{        dataSet: List of data to be analyzed}
+        \PY{l+s+sd}{    Returns:}
+        \PY{l+s+sd}{        List of indices for missing entries}
+        \PY{l+s+sd}{    \PYZsq{}\PYZsq{}\PYZsq{}}
+            
+            \PY{c+c1}{\PYZsh{} Use list comprehension to locate the entries equal to \PYZhy{}99.99}
+            \PY{c+c1}{\PYZsh{} Indices of these entries are stored in a list and returned}
+            \PY{k}{return} \PY{p}{[}\PY{n}{i} \PY{k}{for} \PY{n}{i}\PY{p}{,} \PY{n}{x} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{dataSet}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{average}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)} \PY{k}{if} \PY{n}{x} \PY{o}{==} \PY{o}{\PYZhy{}}\PY{l+m+mf}{99.99}\PY{p}{]}
+            
+            
+        \PY{k}{def} \PY{n+nf}{getSample}\PY{p}{(}\PY{n}{index}\PY{p}{,} \PY{n}{dataSet}\PY{o}{=}\PY{n}{data}\PY{p}{)}\PY{p}{:}
+            \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}}
+        \PY{l+s+sd}{    Function is to be used in Lagrange interpolation process. Given the index, we wish to use the neighboring 4 data points}
+        \PY{l+s+sd}{    (so long as they are not themselves missing data points). For each useable measurement, a 2\PYZhy{}tuple is created and added}
+        \PY{l+s+sd}{    to the return list. The elements of the tuple are the decimal date and the average CO2 count.}
+        \PY{l+s+sd}{    }
+        \PY{l+s+sd}{    Parameters:}
+        \PY{l+s+sd}{        index: Entry number in data set corresponding to point we are interpolating}
+        \PY{l+s+sd}{        dataSet: List of data to be analyzed}
+        \PY{l+s+sd}{    Returns:}
+        \PY{l+s+sd}{        List of indices for missing entries}
+        \PY{l+s+sd}{    \PYZsq{}\PYZsq{}\PYZsq{}}
+            
+            \PY{n}{date\PYZus{}list} \PY{o}{=} \PY{p}{[}\PY{p}{]} \PY{c+c1}{\PYZsh{} Decimal Dates of points used in interpolation}
+            \PY{n}{averageCount\PYZus{}list} \PY{o}{=} \PY{p}{[}\PY{p}{]} \PY{c+c1}{\PYZsh{} CO2 counts used in interpolation }
+            
+            \PY{c+c1}{\PYZsh{} If neighboring 4 measurements are not missing, then for each measurement: create a 2\PYZhy{}tuple }
+            \PY{c+c1}{\PYZsh{} that contains the decimal date and the count form the average column}
+            \PY{k}{for} \PY{n}{row} \PY{o+ow}{in} \PY{n}{data}\PY{p}{[}\PY{n}{index} \PY{o}{\PYZhy{}} \PY{l+m+mi}{2}\PY{p}{:}\PY{n}{index} \PY{o}{+} \PY{l+m+mi}{3}\PY{p}{]}\PY{p}{:}
+                
+                \PY{k}{if} \PY{n}{row}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{average}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZgt{}} \PY{l+m+mi}{0}\PY{p}{:}
+                    
+                    \PY{n}{date\PYZus{}list}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{row}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ddate}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+                    \PY{n}{averageCount\PYZus{}list}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{row}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{average}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+                    
+            \PY{n}{data\PYZus{}subSet} \PY{o}{=} \PY{p}{[}\PY{n}{i} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{zip}\PY{p}{(}\PY{n}{date\PYZus{}list}\PY{p}{,} \PY{n}{averageCount\PYZus{}list}\PY{p}{)}\PY{p}{]}
+            
+            \PY{k}{return} \PY{n}{data\PYZus{}subSet}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{k}{def} \PY{n+nf}{lagrangeCoefficient}\PY{p}{(}\PY{n}{term}\PY{p}{,}\PY{n}{sub\PYZus{}set}\PY{p}{,} \PY{n}{x}\PY{p}{)}\PY{p}{:}
+            \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}}
+        \PY{l+s+sd}{    Function calculates the coefficient of a term in the Lagrange Interpolation Polynomial. General formula provided in }
+        \PY{l+s+sd}{    the intoduction section.}
+        \PY{l+s+sd}{    }
+        \PY{l+s+sd}{    Parameters:}
+        \PY{l+s+sd}{        term: data point in close proximity to the interpolation point}
+        \PY{l+s+sd}{        sub\PYZus{}set: set of all data points used in the interpolation process}
+        \PY{l+s+sd}{    Returns:}
+        \PY{l+s+sd}{        product: Coefficient of polynmial term}
+        \PY{l+s+sd}{    \PYZsq{}\PYZsq{}\PYZsq{}}
+            \PY{n}{i} \PY{o}{=} \PY{n}{term}
+            \PY{n}{product} \PY{o}{=} \PY{l+m+mi}{1}
+            \PY{k}{for} \PY{n}{j} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{sub\PYZus{}set}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                
+                    \PY{k}{if} \PY{n}{j} \PY{o}{!=} \PY{n}{i}\PY{p}{:}
+                        \PY{n}{product} \PY{o}{*}\PY{o}{=} \PY{p}{(}\PY{n}{x} \PY{o}{\PYZhy{}} \PY{n}{sub\PYZus{}set}\PY{p}{[}\PY{n}{j}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)} \PY{o}{/} \PY{p}{(} \PY{n}{sub\PYZus{}set}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{n}{sub\PYZus{}set}\PY{p}{[}\PY{n}{j}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{p}{)}
+                        
+            \PY{k}{return} \PY{n}{product}
+        
+        \PY{k}{def} \PY{n+nf}{interpolate}\PY{p}{(}\PY{n}{sub\PYZus{}set}\PY{p}{,} \PY{n}{x}\PY{p}{)}\PY{p}{:}
+            \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}}
+        \PY{l+s+sd}{    Function calculates the Lagrange Interpolation Polynomial at specified value of x (decimal date). General formula }
+        \PY{l+s+sd}{    provided in the introduction section.}
+        \PY{l+s+sd}{    }
+        \PY{l+s+sd}{    Parameters:}
+        \PY{l+s+sd}{        sub\PYZus{}set: Neighboring data of interpolation point}
+        \PY{l+s+sd}{        x: The decimal date of the missing CO2 count}
+        \PY{l+s+sd}{    Returns:}
+        \PY{l+s+sd}{        sum: Lagrange interpolated value}
+        \PY{l+s+sd}{    \PYZsq{}\PYZsq{}\PYZsq{}}
+            \PY{n+nb}{sum} \PY{o}{=} \PY{l+m+mi}{0}
+            
+            \PY{c+c1}{\PYZsh{} Loop corresponds to the polynomial equation described in the introduction}
+            \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{sub\PYZus{}set}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                \PY{n+nb}{sum} \PY{o}{+}\PY{o}{=} \PY{p}{(} \PY{n}{lagrangeCoefficient}\PY{p}{(}\PY{n}{i}\PY{p}{,} \PY{n}{sub\PYZus{}set}\PY{p}{,} \PY{n}{x}\PY{p}{)} \PY{o}{*} \PY{n}{sub\PYZus{}set}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{p}{)} 
+            \PY{k}{return} \PY{n+nb}{sum}
+\end{Verbatim}
+
+
+    Now that I have implemented the required functions to perform the
+Lagrange Interpolation process, we should check the results against the
+NOAA data.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{c+c1}{\PYZsh{} import panads to create a table displaying results}
+        \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+        
+        \PY{c+c1}{\PYZsh{} Locate the missing moths}
+        \PY{n}{index\PYZus{}of\PYZus{}missing} \PY{o}{=} \PY{n}{locateMissingMonths}\PY{p}{(}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Declare lists for decimal date, lagrange and NOAA interpolation for missing points }
+        \PY{n}{dates\PYZus{}of\PYZus{}missing} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+        \PY{n}{lagrange\PYZus{}inter} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+        \PY{n}{NOAA\PYZus{}inter} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+        
+        \PY{c+c1}{\PYZsh{} For each missing point, save date and interpolated values}
+        \PY{k}{for} \PY{n}{index} \PY{o+ow}{in} \PY{n}{index\PYZus{}of\PYZus{}missing}\PY{p}{:}
+            \PY{n}{data\PYZus{}subSet} \PY{o}{=} \PY{n}{getSample}\PY{p}{(}\PY{n}{index}\PY{p}{)}
+            \PY{n}{dates\PYZus{}of\PYZus{}missing}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ddate}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{n}{index}\PY{p}{]}\PY{p}{)}
+            \PY{n}{lagrange\PYZus{}inter}\PY{o}{.}\PY{n}{append}\PY{p}{(} \PY{n}{np}\PY{o}{.}\PY{n}{round}\PY{p}{(}\PY{n}{interpolate}\PY{p}{(}\PY{n}{data\PYZus{}subSet}\PY{p}{,} \PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ddate}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{n}{index}\PY{p}{]}\PY{p}{)}\PY{p}{,} \PY{l+m+mi}{2} \PY{p}{)} \PY{p}{)} 
+            \PY{n}{NOAA\PYZus{}inter}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{data}\PY{p}{[}\PY{n}{index}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{interpolated}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Dataframe used to present our results}
+        \PY{n}{df1} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{p}{\PYZob{}}
+            \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Decimal Date}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{dates\PYZus{}of\PYZus{}missing}\PY{p}{,}
+            \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Lagrange Interpolated (ppm)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{lagrange\PYZus{}inter}\PY{p}{,}
+            \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{NOAA Interpolated (ppm)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{NOAA\PYZus{}inter}
+        \PY{p}{\PYZcb{}}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Compare NOOA/ Lagrange methods of Interpolating Missing Keeling Curve Points}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{df1}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Compare NOOA/ Lagrange methods of Interpolating Missing Keeling Curve Points
+
+   Decimal Date  Lagrange Interpolated (ppm)  NOAA Interpolated (ppm)
+0      1958.458                       316.85                   317.10
+1      1958.792                       312.75                   312.66
+2      1964.125                       320.82                   320.07
+3      1964.208                       320.91                   320.73
+4      1964.292                       322.61                   321.77
+5      1975.958                       330.45                   330.59
+6      1984.292                       346.82                   346.84
+
+    \end{Verbatim}
+
+    I would be lying if I said I wasn't surprised at how close the values
+are- given the range in the original file. It appears only using 2
+neighboring points to interpolate the missing month that was surrounded
+by 2 missing values didn't blow up the process. Accounting for this may
+produce closer results, however we will run with the process "as-is" and
+see what comes of it.
+
+Next, we need to replace the missing points with the new calculated
+values. We will define a function that performs the entire process and
+replaces the missing values with the new values as we iterate through
+the list.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{c+c1}{\PYZsh{} Second reference variable of original data set for testing purposes}
+        \PY{n}{filename} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{co2\PYZus{}mm\PYZus{}mlo.txt}\PY{l+s+s1}{\PYZsq{}}
+        \PY{n}{data2} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{genfromtxt}\PY{p}{(} \PY{n}{filename}\PY{p}{,} \PY{n}{skip\PYZus{}header}\PY{o}{=}\PY{l+m+mi}{72}\PY{p}{,} \PY{n}{max\PYZus{}rows}\PY{o}{=}\PY{l+m+mi}{792}\PY{p}{,} \PY{n}{usecols}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{,} 
+                             \PY{n}{names}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{month}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ddate}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{average}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{interpolated}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{trend}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{p}{)}
+        
+        \PY{k}{def} \PY{n+nf}{interpolate\PYZus{}missing\PYZus{}data}\PY{p}{(}\PY{n}{dataSet}\PY{o}{=}\PY{n}{data2}\PY{p}{)}\PY{p}{:}
+            \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}}
+        \PY{l+s+sd}{    Function locates months where the average CO2 count is missing and replaces it will the Lagrange interpolated}
+        \PY{l+s+sd}{    value, using several helper functions.}
+        \PY{l+s+sd}{    }
+        \PY{l+s+sd}{    Parameters:}
+        \PY{l+s+sd}{        dataSet: List of data to be analyzed}
+        \PY{l+s+sd}{        }
+        \PY{l+s+sd}{    Returns:}
+        \PY{l+s+sd}{        dataSet: List of data where the missing months have been replaced by Lagrange interpolated values}
+        \PY{l+s+sd}{    \PYZsq{}\PYZsq{}\PYZsq{}}
+            \PY{c+c1}{\PYZsh{} First locate missing months}
+            \PY{n}{index\PYZus{}of\PYZus{}missing} \PY{o}{=} \PY{n}{locateMissingMonths}\PY{p}{(}\PY{n}{dataSet}\PY{p}{)}
+            
+            \PY{c+c1}{\PYZsh{} For each missing month; get sample of surrounding data, interpolate, and replace with this new value}
+            \PY{k}{for} \PY{n}{index} \PY{o+ow}{in} \PY{n}{index\PYZus{}of\PYZus{}missing}\PY{p}{:}
+                \PY{n}{data\PYZus{}subSet} \PY{o}{=} \PY{n}{getSample}\PY{p}{(}\PY{n}{index}\PY{p}{)}
+                \PY{n}{new\PYZus{}value} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{round}\PY{p}{(}\PY{n}{interpolate}\PY{p}{(}\PY{n}{data\PYZus{}subSet}\PY{p}{,} \PY{n}{dataSet}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ddate}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{n}{index}\PY{p}{]}\PY{p}{)}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}
+                \PY{n}{data2}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{interpolated}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{n}{index}\PY{p}{]} \PY{o}{=} \PY{n}{new\PYZus{}value}
+            
+            \PY{k}{return} \PY{n}{dataSet}
+\end{Verbatim}
+
+
+    A plot of both interpolated lists versus decimal date will provide some
+qualitative information on how successful this attempt was at filling in
+the missing months.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{c+c1}{\PYZsh{} Gather Lagrange and NOAA interpolated data sets for ease of plotting}
+        \PY{n}{sets} \PY{o}{=} \PY{p}{[}\PY{n}{interpolate\PYZus{}missing\PYZus{}data}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{data}\PY{p}{]}
+        \PY{c+c1}{\PYZsh{} Define and Increase linewidth as the curves are nearly identical and they overlap}
+        \PY{n}{line} \PY{o}{=} \PY{l+m+mi}{4}
+        
+        \PY{n}{fig} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{15}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{} Plot both interpolated sets superimposed on figure}
+        \PY{k}{for} \PY{n+nb}{set} \PY{o+ow}{in} \PY{n}{sets}\PY{p}{:}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n+nb}{set}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ddate}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n+nb}{set}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{interpolated}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{linewidth} \PY{o}{=} \PY{n}{line}\PY{p}{)}
+            \PY{n}{line}\PY{o}{=}\PY{l+m+mi}{2} \PY{c+c1}{\PYZsh{} Reduce linewidth after fist curve is plotted}
+        \PY{c+c1}{\PYZsh{} Define Legend tags}
+        \PY{n}{legend\PYZus{}labels} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Lagrange Interpolation}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{NOAA Interpolation}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+        
+        \PY{c+c1}{\PYZsh{} Customize graph}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Compare NOOA/ Lagrange methods of Interpolating Missing Keeling Curve Points}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{xx\PYZhy{}large}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Decimal Date (Year)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{x\PYZhy{}large}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZdl{}CO\PYZus{}2\PYZdl{} concentration (ppm)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{x\PYZhy{}large}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        
+        \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{n}{legend\PYZus{}labels}\PY{p}{,} \PY{n}{loc}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{x\PYZhy{}large}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{borderaxespad}\PY{o}{=}\PY{l+m+mi}{3}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_13_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    As mentioned in the comments above, the linewidth of the first curve was
+increased as both curves are nearly identical to each other. It should
+be noted that there appears to be some deviation between the sets in
+1964, however overall, they appear quite close to each other.
+
+Now we must remove the seasonal fluctuations. For simplicity I am going
+to simply create a list where the entries are the average of counts
+separated by 6 months. Based on the sinusoidal like nature of the above
+plot, this should hopefully produce the results we are looking for.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{c+c1}{\PYZsh{} Define lists for date and trend values that are located in between pre\PYZhy{}existing values }
+        \PY{n}{ddate\PYZus{}list} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+        \PY{n}{trend\PYZus{}list} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+        
+        \PY{c+c1}{\PYZsh{} To move forward 6 months, we need to step forward 6\PYZhy{}1 points}
+        \PY{n}{steps} \PY{o}{=} \PY{l+m+mi}{5}
+        
+        \PY{c+c1}{\PYZsh{} Make date and trend lists, where the entries are the values averaged over 6 months}
+        \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{data}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n}{steps}\PY{p}{)}\PY{p}{:}
+            \PY{n}{ddate\PYZus{}list}\PY{o}{.}\PY{n}{append}\PY{p}{(} \PY{p}{(} \PY{n}{data2}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ddate}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{+} \PY{n}{data2}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ddate}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{n}{i}\PY{o}{+}\PY{n}{steps}\PY{p}{]} \PY{p}{)} \PY{o}{/} \PY{l+m+mf}{2.0} \PY{p}{)}
+            \PY{n}{trend\PYZus{}list}\PY{o}{.}\PY{n}{append}\PY{p}{(} \PY{p}{(} \PY{n}{data2}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{interpolated}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{+} \PY{n}{data2}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{interpolated}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{n}{i}\PY{o}{+}\PY{n}{steps}\PY{p}{]} \PY{p}{)} \PY{o}{/} \PY{l+m+mf}{2.0} \PY{p}{)}
+            
+        \PY{c+c1}{\PYZsh{} Plot results against NOAA trend values}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{15}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{ddate\PYZus{}list}\PY{p}{,} \PY{n}{trend\PYZus{}list}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Attempt at removing seasonal fluctuations}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{linewidth}\PY{o}{=}\PY{l+m+mi}{4}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ddate}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}\PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{trend}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{NOAA Trend}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{linewidth}\PY{o}{=}\PY{l+m+mi}{4}\PY{p}{,} \PY{n}{alpha}\PY{o}{=}\PY{l+m+mf}{0.7}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Customize Graph}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Comparing Trend data with NOOA values for Keeling Curve}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{xx\PYZhy{}large}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Decimal Date (Year)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{x\PYZhy{}large}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZdl{}CO\PYZus{}2\PYZdl{} Concentration (ppm)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{x\PYZhy{}large}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        
+        \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{n}{loc}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{x\PYZhy{}large}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{borderaxespad}\PY{o}{=}\PY{l+m+mi}{3}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_15_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    I was unable to remove the seasonal fluctuations to the extent that I
+was hoping for. I attempted to use a backward window technique, however
+this did not produce results that were any closer to the NOAA trend set.
+None-the-less, I believe this interpolation exercise was worth
+attempting, as it gave some insight into what sort of manipulations may
+have been performed on the data.
+
+\subsubsection{Task 2a}\label{task-2a}
+
+Next, we will attempt to fit a line of best fit to both trend sets. The
+class notes provided a general method to obtain a best fit curve. The
+first step to define the nature of the model we intent to fit. In the
+case of a line of best fit, we would define a function that calculates
+the dependent variable(s), say \(y\), using the form:
+
+\[y=mx+b\]
+
+Where m is the slope, and b is the y-intercept.
+
+Our goal is to use to find coefficients that result in the lowest value
+of chi-square. While an in-depth statistical analysis is not possible
+without the proper education, we will simply declare that our goal is to
+mimize the chi-square, \(\chi^2\), as it gives a measure of how tight
+the curve fits the data points.
+
+\[\chi^2=\dfrac{(expected-observed)^2}{(uncertainty)^2}\]
+
+This expression makes sense since we expect that, on average, the data
+points will be within uncertainty of the model. We have applied this
+concept in our laboratories many times, and the notion is not foreign.
+What is new to us, is how to go about minimizing this value. We have
+been instructed to use Scipy's optimize.minimize method.
+
+Using the template from the class notes, we define a function that will
+utilize the linear fit function, pass it coefficients, and return the
+calculated chi-square value. A source of confusion was with the
+uncertainty used in this calculation. It was decided to simply use \(1\)
+to stay consistent with the method laid out in the notes. The hope is
+that this value will produce some meaningful results, but without the
+proper statistical background we unfortunately cannot come up with a
+better estimate.
+
+The last step in our process will be to pass the minimize function this
+fit function, along with a "best guess" of the linear coefficients (used
+as a starting point in the chi-square minimizing process). The function
+will return parameters corresponding to the coefficients that
+effectively minimize the chi-square value. These coefficients can then
+be used to plot a line of best fit, which we can compare against a
+scatter plot of the data.
+
+Note that we will comment on the chi-square values at the end of this
+document. At that point we will have several models for which we can
+compare against one-another.
+
+Let's go ahead and define the functions used in this week's set of
+notes. We will use these to obtain linear fit coefficients for both sets
+of seasonally corrected values (Lagrange and NOOA).
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{k+kn}{import} \PY{n+nn}{scipy}\PY{n+nn}{.}\PY{n+nn}{optimize}
+        
+        \PY{k}{def} \PY{n+nf}{linear\PYZus{}model}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{param}\PY{p}{)}\PY{p}{:}
+            \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{} }
+        \PY{l+s+sd}{    Function models linear fit.}
+        \PY{l+s+sd}{    }
+        \PY{l+s+sd}{    Parameters:}
+        \PY{l+s+sd}{        x: Dependent variable(s)}
+        \PY{l+s+sd}{        param: 2\PYZhy{}tuple of slope and intercept}
+        \PY{l+s+sd}{        }
+        \PY{l+s+sd}{    Returns}
+        \PY{l+s+sd}{        slope * x + intercept}
+        \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+            
+            \PY{c+c1}{\PYZsh{} Unpack 2\PYZhy{}tuple with coefficients}
+            \PY{n}{slope}\PY{p}{,} \PY{n}{intercept} \PY{o}{=} \PY{n}{param}
+        
+            \PY{k}{return} \PY{n}{slope}\PY{o}{*}\PY{n}{x} \PY{o}{+} \PY{n}{intercept}
+\end{Verbatim}
+
+
+    When defining the function that calculates the chi-square value, we will
+be proactive and include a parameter (String type) that indicates which
+model we are using. Note that the control structures (and their code
+blocks) in this function were added as we worked through the analysis.
+Thus, they may not make sense until later in the document.
+
+Note that the sum of chi-square calculations is divided by the number of
+data points. This is an attempt to normalize the chi-square value, which
+is necessary when comparing multiple values.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{k}{def} \PY{n+nf}{fit\PYZus{}func}\PY{p}{(}\PY{n}{param}\PY{p}{,} \PY{o}{*}\PY{n}{args}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{} }
+         \PY{l+s+sd}{    Function calculates chi\PYZhy{}square value for a dataset and fit model.}
+         \PY{l+s+sd}{    }
+         \PY{l+s+sd}{    Parameters: }
+         \PY{l+s+sd}{        param: Dependent on fit model (all of type float)}
+         \PY{l+s+sd}{                If args[\PYZhy{}1] == \PYZsq{}linear\PYZsq{}:}
+         \PY{l+s+sd}{                    2\PYZhy{}tuple has slope and intercept}
+         \PY{l+s+sd}{                If args[\PYZhy{}1] == \PYZsq{}periodic\PYZsq{} OR \PYZsq{}sine\PYZsq{}}
+         \PY{l+s+sd}{                    4\PYZhy{}tuple has ampltidue, period, offset, phase}
+         \PY{l+s+sd}{        args:   set of independent values, set of corresponding dependent values, String indicating}
+         \PY{l+s+sd}{                fit model (\PYZsq{}linear\PYZsq{}, \PYZsq{}periodic\PYZsq{}, or \PYZsq{}sine\PYZsq{})}
+         \PY{l+s+sd}{    }
+         \PY{l+s+sd}{    Returns}
+         \PY{l+s+sd}{        chi: Sum of Chi\PYZhy{}square values scaled down by length of dependent variables  }
+         \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+             
+             \PY{c+c1}{\PYZsh{} Fit models are explained as they appear in document. Method for each case is the same\PYZhy{}}
+             \PY{c+c1}{\PYZsh{} Calculate and return chi\PYZhy{}square value for dataset and coefficients passed as parameters}
+             \PY{k}{if} \PY{n}{args}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{linear}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}
+                 \PY{n}{slope}\PY{p}{,} \PY{n}{intercept} \PY{o}{=} \PY{n}{param}
+                 \PY{n}{x}\PY{p}{,} \PY{n}{y\PYZus{}data} \PY{o}{=} \PY{n}{args}\PY{p}{[}\PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}
+                 \PY{n}{y\PYZus{}model} \PY{o}{=} \PY{n}{linear\PYZus{}model}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{p}{(}\PY{n}{slope}\PY{p}{,} \PY{n}{intercept}\PY{p}{)}\PY{p}{)}
+                 \PY{n}{residuals} \PY{o}{=} \PY{n}{y\PYZus{}model} \PY{o}{\PYZhy{}} \PY{n}{y\PYZus{}data}
+                 \PY{n}{chi} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(} \PY{n}{residuals}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2} \PY{p}{)} \PY{o}{/} \PY{n+nb}{len}\PY{p}{(} \PY{n}{residuals} \PY{p}{)}
+             
+             \PY{k}{if} \PY{n}{args}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{periodic}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}
+                 \PY{n}{amplitdue}\PY{p}{,} \PY{n}{period}\PY{p}{,} \PY{n}{offset}\PY{p}{,} \PY{n}{phase} \PY{o}{=} \PY{n}{param}
+                 \PY{n}{x}\PY{p}{,} \PY{n}{y\PYZus{}data} \PY{o}{=} \PY{n}{args}\PY{p}{[}\PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}
+                 \PY{n}{y\PYZus{}model} \PY{o}{=} \PY{n}{periodic\PYZus{}fit}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{p}{(}\PY{n}{amplitdue}\PY{p}{,} \PY{n}{period}\PY{p}{,} \PY{n}{offset}\PY{p}{,} \PY{n}{phase}\PY{p}{)}\PY{p}{)}
+                 \PY{n}{residuals} \PY{o}{=} \PY{n}{y\PYZus{}model} \PY{o}{\PYZhy{}} \PY{n}{y\PYZus{}data}
+                 \PY{n}{chi} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(} \PY{n}{residuals}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2} \PY{p}{)} \PY{o}{/} \PY{n+nb}{len}\PY{p}{(} \PY{n}{residuals}\PY{p}{)}
+             
+             \PY{k}{if} \PY{n}{args}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sine}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}
+                 \PY{n}{amplitdue}\PY{p}{,} \PY{n}{period}\PY{p}{,} \PY{n}{offset}\PY{p}{,} \PY{n}{phase} \PY{o}{=} \PY{n}{param}
+                 \PY{n}{x}\PY{p}{,} \PY{n}{y\PYZus{}data} \PY{o}{=} \PY{n}{args}\PY{p}{[}\PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}
+                 \PY{n}{y\PYZus{}model} \PY{o}{=} \PY{n}{sine\PYZus{}fit}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{p}{(}\PY{n}{amplitdue}\PY{p}{,} \PY{n}{period}\PY{p}{,} \PY{n}{offset}\PY{p}{,} \PY{n}{phase}\PY{p}{)}\PY{p}{)}
+                 \PY{n}{residuals} \PY{o}{=} \PY{n}{y\PYZus{}model} \PY{o}{\PYZhy{}} \PY{n}{y\PYZus{}data}
+                 \PY{n}{chi} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(} \PY{n}{residuals}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2} \PY{p}{)} \PY{o}{/} \PY{n+nb}{len}\PY{p}{(}\PY{n}{residuals}\PY{p}{)}
+             
+             \PY{k}{return} \PY{n}{chi}
+\end{Verbatim}
+
+
+    We will now use the linear\_model and fit\_func functions to determine
+the coefficients corresponding to the lines of best fit, for both
+interpolated datasets.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{c+c1}{\PYZsh{} LAGRANGE INTERPOLATED/ CORRECTED DATA SET}
+         
+         \PY{c+c1}{\PYZsh{} Cast Lagrange data to numpy array}
+         \PY{n}{lagrange\PYZus{}x} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{ddate\PYZus{}list}\PY{p}{)}
+         \PY{n}{lagrange\PYZus{}y} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{trend\PYZus{}list}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Super rough (qualitative) guess based on graphs above }
+         \PY{n}{linear\PYZus{}param\PYZus{}guess} \PY{o}{=} \PY{p}{[}\PY{l+m+mf}{1.0}\PY{p}{,} \PY{l+m+mi}{300}\PY{p}{]}
+         
+         \PY{c+c1}{\PYZsh{} Run minimize using function defined above to produce slope/ intercept that represent line of best fit}
+         \PY{n}{lagrange\PYZus{}params} \PY{o}{=} \PY{n}{scipy}\PY{o}{.}\PY{n}{optimize}\PY{o}{.}\PY{n}{minimize}\PY{p}{(}\PY{n}{fit\PYZus{}func}\PY{p}{,} \PY{n}{linear\PYZus{}param\PYZus{}guess}\PY{p}{,} \PY{p}{(}\PY{n}{lagrange\PYZus{}x}\PY{p}{,} \PY{n}{lagrange\PYZus{}y}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{linear}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{,} \PY{n}{method}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Nelder\PYZhy{}Mead}\PY{l+s+s1}{\PYZsq{}} \PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{c+c1}{\PYZsh{} NOAA TREND DATA SET}
+         
+         \PY{c+c1}{\PYZsh{} Define x\PYZhy{}y values to be used in minimizing process}
+         \PY{n}{NOAA\PYZus{}x} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ddate}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+         \PY{n}{NOAA\PYZus{}y} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{trend}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Run minimize using function defined above to produce slope/ intercept that represent line of best fit}
+         \PY{n}{NOAA\PYZus{}params} \PY{o}{=} \PY{n}{scipy}\PY{o}{.}\PY{n}{optimize}\PY{o}{.}\PY{n}{minimize}\PY{p}{(}\PY{n}{fit\PYZus{}func}\PY{p}{,} \PY{n}{linear\PYZus{}param\PYZus{}guess}\PY{p}{,} \PY{p}{(}\PY{n}{NOAA\PYZus{}x}\PY{p}{,} \PY{n}{NOAA\PYZus{}y}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{linear}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{,} \PY{n}{method}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Nelder\PYZhy{}Mead}\PY{l+s+s1}{\PYZsq{}} \PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Using the calculated parameters and dates, produce a list of CO2 counts that lie on line of best fit}
+         \PY{n}{lagrange\PYZus{}linear\PYZus{}model} \PY{o}{=} \PY{n}{linear\PYZus{}model}\PY{p}{(}\PY{n}{lagrange\PYZus{}x}\PY{p}{,} \PY{n}{lagrange\PYZus{}params}\PY{o}{.}\PY{n}{x}\PY{p}{)}
+         \PY{n}{NOAA\PYZus{}linear\PYZus{}model} \PY{o}{=} \PY{n}{linear\PYZus{}model}\PY{p}{(}\PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ddate}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{NOAA\PYZus{}params}\PY{o}{.}\PY{n}{x}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{c+c1}{\PYZsh{} Equation for lines of best fit (displayed on graphs below)}
+         \PY{n}{m1} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{round}\PY{p}{(}\PY{n}{lagrange\PYZus{}params}\PY{o}{.}\PY{n}{x}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}\PY{o}{.}\PY{n+nf+fm}{\PYZus{}\PYZus{}str\PYZus{}\PYZus{}}\PY{p}{(}\PY{p}{)}
+         \PY{n}{b1} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{round}\PY{p}{(}\PY{n}{lagrange\PYZus{}params}\PY{o}{.}\PY{n}{x}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}\PY{o}{.}\PY{n+nf+fm}{\PYZus{}\PYZus{}str\PYZus{}\PYZus{}}\PY{p}{(}\PY{p}{)}
+         \PY{n}{line1} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{y = }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n}{m1} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ * x + }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n}{b1}
+         
+         \PY{n}{m2} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{round}\PY{p}{(}\PY{n}{NOAA\PYZus{}params}\PY{o}{.}\PY{n}{x}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}\PY{o}{.}\PY{n+nf+fm}{\PYZus{}\PYZus{}str\PYZus{}\PYZus{}}\PY{p}{(}\PY{p}{)}
+         \PY{n}{b2} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{round}\PY{p}{(}\PY{n}{NOAA\PYZus{}params}\PY{o}{.}\PY{n}{x}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}\PY{o}{.}\PY{n+nf+fm}{\PYZus{}\PYZus{}str\PYZus{}\PYZus{}}\PY{p}{(}\PY{p}{)}
+         \PY{n}{line2} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{y = }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n}{m1} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ * x + }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n}{b1}
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Lagrange Method:}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+se}{\PYZbs{}t}\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n}{line1}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{NOOA DATA:}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+se}{\PYZbs{}t}\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n}{line2}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Lagrange Method:
+	y = 1.54 * x + -2713.07
+NOOA DATA:
+	y = 1.54 * x + -2713.07
+
+    \end{Verbatim}
+
+    Not surprisingly (considering only 5 data points were missing) we came
+up with the same equations for the lines of best fit for each method.
+
+Let's plot these lines along with the data.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{c+c1}{\PYZsh{} Plot each data set and line of best on its own subplot}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{15}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{suptitle}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Keeling Curve \PYZhy{} \PYZdl{}CO\PYZus{}2\PYZdl{} Concentration at Mauna Loa Observatory}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{25}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} LAGRANGE METHOD}
+         \PY{c+c1}{\PYZsh{} Title, axis labels, equation of line}
+         \PY{n}{ax1} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{ax1}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Lagrange Method Data}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{15}\PY{p}{)}
+         \PY{n}{ax1}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{size}\PY{o}{=}\PY{l+m+mi}{15}\PY{p}{)}
+         \PY{n}{ax1}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZdl{}CO\PYZus{}2\PYZdl{} Cocentration (ppm)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{size}\PY{o}{=}\PY{l+m+mi}{15}\PY{p}{)}
+         \PY{n}{ax1}\PY{o}{.}\PY{n}{text}\PY{p}{(}\PY{l+m+mi}{1990}\PY{p}{,} \PY{l+m+mi}{320}\PY{p}{,} \PY{n}{line1}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{12}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} Plot data as scatter plot and superimpose line of best fit}
+         \PY{n}{ax1}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{ddate\PYZus{}list}\PY{p}{,} \PY{n}{trend\PYZus{}list}\PY{p}{,} \PY{n}{s}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{c}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{red}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Interpolated/ Corrected Data}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax1}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{ddate\PYZus{}list}\PY{p}{,} \PY{n}{lagrange\PYZus{}linear\PYZus{}model}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Linear Fit}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{linewidth}\PY{o}{=}\PY{l+m+mi}{3}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} Add legend}
+         \PY{n}{ax1}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{n}{fontsize}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{large}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{borderaxespad}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{markerscale}\PY{o}{=}\PY{l+m+mi}{5}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} NOAA DATA}
+         \PY{c+c1}{\PYZsh{} Title, axis labels, equation of line}
+         \PY{n}{ax2} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}
+         \PY{n}{ax2}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{NOAA Trend Data}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{15}\PY{p}{)}
+         \PY{n}{ax2}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{size}\PY{o}{=}\PY{l+m+mi}{15}\PY{p}{)}
+         \PY{n}{ax2}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZdl{}CO\PYZus{}2\PYZdl{} Cocentration (ppm)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{size}\PY{o}{=}\PY{l+m+mi}{15}\PY{p}{)}
+         \PY{n}{ax2}\PY{o}{.}\PY{n}{text}\PY{p}{(}\PY{l+m+mi}{1990}\PY{p}{,} \PY{l+m+mi}{320}\PY{p}{,} \PY{n}{line2}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{12}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} Plot data as scatter plot and superimpose line of best fit}
+         \PY{n}{ax2}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ddate}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{trend}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{s}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{c}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{red}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Interpolated/ Corrected Data}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax2}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ddate}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{NOAA\PYZus{}linear\PYZus{}model}\PY{p}{,}  \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Linear Fit}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{linewidth}\PY{o}{=}\PY{l+m+mi}{3}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} Add legend}
+         \PY{n}{ax2}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{n}{fontsize}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{large}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{borderaxespad}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{markerscale}\PY{o}{=}\PY{l+m+mi}{5}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Set subplo spacing}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{subplots\PYZus{}adjust}\PY{p}{(}\PY{n}{wspace}\PY{o}{=}\PY{l+m+mf}{0.3}\PY{p}{,} \PY{n}{bottom}\PY{o}{=}\PY{l+m+mf}{0.3}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_25_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Using the scatter plots highlights the differences between my
+interpolated data and that of the NOAA. Using the minimize function is
+certainly more gratifying than using excel or logger pro, and the next
+step would be to determine the uncertainty in the fit parameters. This
+however, is an exercise for another day.
+
+\subsubsection{Task 2b}\label{task-2b}
+
+It may be useful to analyze the \(C0_2\) concentrations over the course
+of single year. In this case we would of course use the interpolated
+data, as the trend set removes the seasonal fluctuations. Due to the
+seasonal dependence of vegetation, we expect that the concentrations may
+appear periodic in nature, especially over the relatively short interval
+of one year. We can attempt to fit the data from 2000 to a cosine model
+and plot the results to see if this is reasonable.
+
+To do so, we must define a periodic fit function and use minimize to
+determine the amplitude, period, offset, and phase coefficients that
+result in the lowest chi-square value.
+
+First, we will isolate to data from 2000 (simply for ease of
+manipulation) using the NOAA interpolated set. We can make a series of
+rough guesses for what the parameters may be. We will continue this
+analysis without the use of the Lagrange method, as the previous results
+indicated these sets are comparable.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}15}]:} \PY{c+c1}{\PYZsh{} Declare sets for decimal date and interpolated CO2 concentration for the year 2000}
+         \PY{n}{ddate\PYZus{}2000} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{n}{interpolated\PYZus{}2000} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         
+         \PY{c+c1}{\PYZsh{} Extract the data from the larger data set}
+         \PY{k}{for} \PY{n}{x} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{data}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+             \PY{k}{if} \PY{l+m+mi}{2000}\PY{o}{\PYZlt{}} \PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ddate}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{n}{x}\PY{p}{]} \PY{o}{\PYZlt{}} \PY{l+m+mi}{2001}\PY{p}{:}
+                 \PY{n}{ddate\PYZus{}2000}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ddate}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{n}{x}\PY{p}{]}\PY{p}{)}
+                 \PY{n}{interpolated\PYZus{}2000}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{interpolated}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{n}{x}\PY{p}{]}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Rough estimate of the amplitude is half peak to peak amplitude}
+         \PY{n}{amplitude} \PY{o}{=} \PY{p}{(} \PY{n}{np}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{n}{interpolated\PYZus{}2000}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n}{np}\PY{o}{.}\PY{n}{min}\PY{p}{(}\PY{n}{interpolated\PYZus{}2000}\PY{p}{)} \PY{p}{)} \PY{o}{/} \PY{l+m+mf}{2.0}
+         \PY{c+c1}{\PYZsh{} Period estimate is date range}
+         \PY{n}{period} \PY{o}{=} \PY{p}{(} \PY{n}{np}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{n}{ddate\PYZus{}2000}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n}{np}\PY{o}{.}\PY{n}{min}\PY{p}{(}\PY{n}{ddate\PYZus{}2000}\PY{p}{)} \PY{p}{)}
+         \PY{c+c1}{\PYZsh{} Offset estimate is the average value of concentrations}
+         \PY{n}{offset} \PY{o}{=} \PY{n+nb}{sum}\PY{p}{(}\PY{n}{interpolated\PYZus{}2000}\PY{p}{)} \PY{o}{/} \PY{n+nb}{len}\PY{p}{(}\PY{n}{interpolated\PYZus{}2000}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} Phase estimate is unkown and will use zero}
+         \PY{n}{phase} \PY{o}{=} \PY{l+m+mf}{0.01}
+         
+         \PY{c+c1}{\PYZsh{} Make a list of the parameter estimates}
+         \PY{n}{periodic\PYZus{}param\PYZus{}guess} \PY{o}{=} \PY{p}{[}\PY{n}{amplitude}\PY{p}{,} \PY{n}{period}\PY{p}{,} \PY{n}{offset}\PY{p}{,} \PY{n}{phase}\PY{p}{]}
+\end{Verbatim}
+
+
+    To use the minimize function we added a periodic case to fit\_func
+defined above. We also need to define a function that returns the
+dependent variable(s) for this cosine fit. The add\_offset parameter has
+been added to the following function to add/remove the DC offset of the
+wave. The feature will be used in the next task and can be disregarded
+for the moment.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}16}]:} \PY{k}{def} \PY{n+nf}{periodic\PYZus{}fit}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{params}\PY{p}{,} \PY{n}{add\PYZus{}offset}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{} }
+         \PY{l+s+sd}{    Function models periodic cosine fit.}
+         \PY{l+s+sd}{    }
+         \PY{l+s+sd}{    Parameters:}
+         \PY{l+s+sd}{        x: Dependent variable(s)}
+         \PY{l+s+sd}{        param: 4\PYZhy{}tuple of amplitude, period, offset, phase}
+         \PY{l+s+sd}{        add\PYZus{}offset: Indicates if a DC offset is desired. Default is \PYZsq{}True\PYZsq{}}
+         \PY{l+s+sd}{        }
+         \PY{l+s+sd}{    Returns}
+         \PY{l+s+sd}{        amplitude * cos(2*pi/period + phase)}
+         \PY{l+s+sd}{        Offset is added to return if indicated with \PYZsq{}True\PYZsq{} parameter}
+         \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+             \PY{c+c1}{\PYZsh{} Unpack 4\PYZhy{}tuple with fit coefficients}
+             \PY{n}{amplitude}\PY{p}{,} \PY{n}{period}\PY{p}{,} \PY{n}{offset}\PY{p}{,} \PY{n}{phase} \PY{o}{=} \PY{n}{params}
+             \PY{c+c1}{\PYZsh{} Calculate angular frequency for readability sake}
+             \PY{n}{omega} \PY{o}{=} \PY{l+m+mf}{2.0}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{pi} \PY{o}{/} \PY{n}{period}
+             
+             \PY{k}{if} \PY{n}{add\PYZus{}offset}\PY{o}{==}\PY{k+kc}{True}\PY{p}{:}
+                 \PY{k}{return} \PY{n}{amplitude}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{cos}\PY{p}{(}\PY{n}{omega}\PY{o}{*}\PY{n}{x} \PY{o}{+} \PY{n}{phase}\PY{p}{)} \PY{o}{+} \PY{n}{offset}
+             \PY{k}{else}\PY{p}{:}
+                 \PY{k}{return} \PY{n}{amplitude}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{cos}\PY{p}{(}\PY{n}{omega}\PY{o}{*}\PY{n}{x} \PY{o}{+} \PY{n}{phase}\PY{p}{)}
+\end{Verbatim}
+
+
+    Using the fit function and this cosine function, the minimize process
+will determine "best" coefficients.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}17}]:} \PY{c+c1}{\PYZsh{} Cast year 2000 data to numpy array}
+         \PY{n}{ddate\PYZus{}2000} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{ddate\PYZus{}2000}\PY{p}{)}
+         \PY{n}{interpolated\PYZus{}2000} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{interpolated\PYZus{}2000}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Run minimize using function defined above to produce cosine model coefficients}
+         \PY{n}{periodic\PYZus{}params} \PY{o}{=} \PY{n}{scipy}\PY{o}{.}\PY{n}{optimize}\PY{o}{.}\PY{n}{minimize}\PY{p}{(}\PY{n}{fit\PYZus{}func}\PY{p}{,} \PY{n}{periodic\PYZus{}param\PYZus{}guess}\PY{p}{,} \PY{p}{(}\PY{n}{ddate\PYZus{}2000}\PY{p}{,} \PY{n}{interpolated\PYZus{}2000}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{periodic}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{,} \PY{n}{method}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Nelder\PYZhy{}Mead}\PY{l+s+s1}{\PYZsq{}} \PY{p}{)}
+\end{Verbatim}
+
+
+    Next, we plot data from 2000 and superimpose the curve of best fit
+obtained using coefficients calculated above.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}18}]:} \PY{c+c1}{\PYZsh{} Rather than only using 12 data points to plot curve of best fit, we will}
+         \PY{c+c1}{\PYZsh{} use to linspace to get a smoother curve}
+         \PY{n}{x} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{l+m+mi}{2000}\PY{p}{,} \PY{l+m+mi}{2001}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Calculate dependent variable list}
+         \PY{n}{y\PYZus{}vals} \PY{o}{=} \PY{n}{periodic\PYZus{}fit}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{periodic\PYZus{}params}\PY{o}{.}\PY{n}{x}\PY{p}{)}
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{15}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{)}
+         \PY{n}{ax} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Plot data form 2000 as scatter plot}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{ddate\PYZus{}2000}\PY{p}{,} \PY{n}{interpolated\PYZus{}2000}\PY{p}{,} \PY{n}{s}\PY{o}{=}\PY{l+m+mi}{40}\PY{p}{,} \PY{n}{c}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{red}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{NOAA Interpolated Data}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} Plot periodic curve of best fit}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{y\PYZus{}vals}\PY{p}{,} \PY{n}{c}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{blue}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Periodic cosine Best Fit}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{linewidth}\PY{o}{=}\PY{l+m+mi}{3}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Customize Graph}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZdl{}CO\PYZus{}2\PYZdl{} Concentrations at Mauna Loa Observatory in the year 2000}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{xx\PYZhy{}large}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Month ()}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{x\PYZhy{}large}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZdl{}CO\PYZus{}2\PYZdl{} Concentration (ppm)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{x\PYZhy{}large}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Set the x ticks to be the months of the year}
+         \PY{n}{ticks} \PY{o}{=} \PY{p}{[}\PY{p}{(}\PY{n}{x}\PY{o}{/}\PY{l+m+mi}{12}\PY{p}{)}\PY{o}{+}\PY{l+m+mf}{2000.0} \PY{k}{for} \PY{n}{x} \PY{o+ow}{in} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{12}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{]}
+         \PY{n}{xlabels} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Jan}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Feb}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Mar}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{April}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{May}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{June}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{July}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Aug}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Sep}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Oct}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Nov}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Dec}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}xticks}\PY{p}{(}\PY{n}{ticks}\PY{p}{)}
+         \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}xticklabels}\PY{p}{(}\PY{n}{xlabels}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Add legend}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{n}{loc}\PY{o}{=}\PY{l+m+mi}{3}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{x\PYZhy{}large}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{borderaxespad}\PY{o}{=}\PY{l+m+mi}{3}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_33_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    First off it is worth noting that the \(CO_2\) concentration fluctuates
+over a relatively small range, when compared to the increase we have
+seen in the past 50 years. The magnitude (roughly +/-3 ppm) is
+surprisingly small, however Maui winters are not the same as we see in
+Calgary. The periodic fit, as produced by the minimize function, seems
+to follow the data points. With their only being 12 points, it is
+difficult to say how tight a fit it is. Further, it isn't hard to
+imagine that many factors influence the concentration over such a brief
+time.
+
+\subsubsection{Task 2c}\label{task-2c}
+
+Let's take this periodic model and apply it over the course of the
+entire data set. We know from the above analysis that the concentration
+levels are in general, increasing year after year. Adding a linear
+component to the yearly fluctuation model should result in a model that
+approximates the interpolated (average) data set. We will combine the
+two models above and compare against the interpolated data.
+
+By removing the DC offset of the periodic curve, we can simply combine
+the linear and periodic models. In doing so, we won't obtain a
+chi-square value for the combined fit, however after plotting against
+the NOAA average set, it is obvious that the model differs a significant
+amount from the data. A visual inspection is enough to know that our fit
+would not be an adequate model for many interpolation or extrapolation
+processes.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}19}]:} \PY{c+c1}{\PYZsh{} Create a list a dates ranging from 1958\PYZhy{}2018}
+         \PY{n}{x} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{l+m+mi}{1958}\PY{p}{,} \PY{l+m+mi}{2018}\PY{p}{,} \PY{l+m+mi}{12}\PY{o}{*}\PY{p}{(}\PY{l+m+mi}{2018}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1958}\PY{p}{)}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Customize plot}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{15}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Keeling Curve \PYZhy{} Yearly Fluctuations of \PYZdl{}CO\PYZus{}2\PYZdl{} Concentration}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{25}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{size}\PY{o}{=}\PY{l+m+mi}{15}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZdl{}CO\PYZus{}2\PYZdl{} Cocentration (ppm)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{size}\PY{o}{=}\PY{l+m+mi}{15}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Use list comprehension to combine linear and periodic models \PYZhy{} remove offset from periodic}
+         \PY{n}{combined} \PY{o}{=} \PY{p}{[}\PY{n+nb}{sum}\PY{p}{(}\PY{n}{x}\PY{p}{)} \PY{k}{for} \PY{n}{x} \PY{o+ow}{in} \PY{n+nb}{zip}\PY{p}{(}\PY{n}{linear\PYZus{}model}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{NOAA\PYZus{}params}\PY{o}{.}\PY{n}{x}\PY{p}{)}\PY{p}{,} \PY{n}{periodic\PYZus{}fit}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{periodic\PYZus{}params}\PY{o}{.}\PY{n}{x}\PY{p}{,} \PY{k+kc}{False}\PY{p}{)}\PY{p}{)}\PY{p}{]}
+         
+         \PY{c+c1}{\PYZsh{} Plot expected and observed data}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{combined}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Linear/ Periodic Combination Fit}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ddate}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{interpolated}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{NOAA Average}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Add legend}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{n}{fontsize}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{large}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{borderaxespad}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{markerscale}\PY{o}{=}\PY{l+m+mi}{5}\PY{p}{)}
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_35_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    We see that the actual data does not appear to increase linearly. The
+periodic component of the modeled curve appears to match the data quite
+well in terms of period, however the amplitdue is smaller than the
+average data set.
+
+To recap: we have experimented with using linear and periodic models to
+fit a particular set a data. In doing so, we have constructed a curve
+that was expected to be a reasonable model of the average data set. For
+the final task, let's see if we can produce a model that provides a
+decent curve of best fit to the entire NOAA trend set.
+
+\subsubsection{Task 3}\label{task-3}
+
+The trend set will follow the same sort of increase observed with the
+average data in the previous graph. After some online research it
+appears that a number of people believe that the \(CO_2\) levels are
+increasing exponentially. I prefer an optimistic outlook and would guess
+that the levels will follow more of a logistic shaped curve, as we find
+some control to the emissions on a global level. If we consider a sine
+function over a quarter period, we have something that resembles a
+logistic curve. Let's apply this sine model to the trend set.
+
+Following the same procedure as the first two fits, we define a sine fit
+function, run the optimize method to determine the coefficients that
+reduce the chi-square value, and plot these resultant model against our
+data.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}20}]:} \PY{k}{def} \PY{n+nf}{sine\PYZus{}fit}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{params}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}}
+         \PY{l+s+sd}{    Function models periodic sine fit}
+         \PY{l+s+sd}{    }
+         \PY{l+s+sd}{    Parameters:}
+         \PY{l+s+sd}{        x: Dependent variable(s)}
+         \PY{l+s+sd}{        param: 4\PYZhy{}tuple of amplitude, period, offset, phase}
+         \PY{l+s+sd}{        }
+         \PY{l+s+sd}{    Returns}
+         \PY{l+s+sd}{        amplitude * sin(2*pi/period + phase)}
+         \PY{l+s+sd}{    \PYZsq{}\PYZsq{}\PYZsq{}}
+             
+             \PY{c+c1}{\PYZsh{} Unpack 4\PYZhy{}tuple of fit coefficients}
+             \PY{n}{amplitude}\PY{p}{,} \PY{n}{period}\PY{p}{,} \PY{n}{offset}\PY{p}{,} \PY{n}{phi} \PY{o}{=} \PY{n}{params}
+             \PY{c+c1}{\PYZsh{} Calculate angular frequency for readability sake}
+             \PY{n}{omega} \PY{o}{=} \PY{l+m+mf}{2.0}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{pi} \PY{o}{/} \PY{n}{period}
+             
+             \PY{k}{return} \PY{n}{amplitude}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{sin}\PY{p}{(}\PY{n}{omega}\PY{o}{*}\PY{n}{x} \PY{o}{+} \PY{n}{phi}\PY{p}{)} \PY{o}{+} \PY{n}{offset} 
+\end{Verbatim}
+
+
+    For the linear and cosine fits I have simply used the output of the
+minimize function, without comment, as discussion regarding the
+chi-square values was left to the end of the document. Here we will show
+the output of minimize and discuss the results. This discussion will
+include the following estimates for the periodic parameters.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}21}]:} \PY{n}{sine\PYZus{}param\PYZus{}guess} \PY{o}{=} \PY{p}{[}\PY{l+m+mf}{100.0}\PY{p}{,} \PY{l+m+mi}{250}\PY{p}{,} \PY{l+m+mf}{500.0}\PY{p}{,} \PY{l+m+mf}{0.0}\PY{p}{]}  \PY{c+c1}{\PYZsh{} amplitude, period, offset, phase}
+         
+         \PY{n}{sine\PYZus{}params} \PY{o}{=} \PY{n}{scipy}\PY{o}{.}\PY{n}{optimize}\PY{o}{.}\PY{n}{minimize}\PY{p}{(}\PY{n}{fit\PYZus{}func}\PY{p}{,} \PY{n}{sine\PYZus{}param\PYZus{}guess}\PY{p}{,} \PY{p}{(}\PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ddate}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{trend}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sine}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{,} \PY{n}{method}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Nelder\PYZhy{}Mead}\PY{l+s+s1}{\PYZsq{}} \PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{sine\PYZus{}params}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+ final\_simplex: (array([[ 7.75511222e+01,  2.51344750e+02,  3.91167832e+02,
+        -5.78823675e-03],
+       [ 7.75511221e+01,  2.51344748e+02,  3.91167809e+02,
+        -5.78823816e-03],
+       [ 7.75511644e+01,  2.51344756e+02,  3.91167917e+02,
+        -5.78822815e-03],
+       [ 7.75511403e+01,  2.51344749e+02,  3.91167824e+02,
+        -5.78823503e-03],
+       [ 7.75511500e+01,  2.51344752e+02,  3.91167856e+02,
+        -5.78823424e-03]]), array([1.08475156, 1.08475156, 1.08475156, 1.08475156, 1.08475156]))
+           fun: 1.0847515587647873
+       message: 'Optimization terminated successfully.'
+          nfev: 333
+           nit: 188
+        status: 0
+       success: True
+             x: array([ 7.75511222e+01,  2.51344750e+02,  3.91167832e+02, -5.78823675e-03])
+
+    \end{Verbatim}
+
+    For the linear and cosine fits we were able to send the minimize
+function estimates for the parameters, without issue. In this case, my
+first guess resulted in a message "Maximum number of function
+evaluations exceeded". Initially, it was assumed that this meant the
+guess was too far from the ideal coefficients. After playing around with
+the coefficients it was noted that minimize could successfully return
+parameters over a wide range- too wide in fact. This means that the
+success of the minimize function gives no indication of the validity of
+the best fit parameters. It other words, we could successfully run the
+function for a period of 200 years, 300 years, or even 400 years.
+Unfortunately, my level of understanding in curve fitting does not
+provide the most in-depth analysis of this situation.
+
+To apply some logic here, the period was adjusted until the lowest
+chi-square value was obtained. The best explanation I can come up with
+is that we would require data over the course of (at least) a full
+period, to "force" the curve to a period and/ or amplitude. This may
+make sense, since it is highly unlikely that the long term \(CO_2\)
+concentration will exhibit sine wave properties, and the data we have
+would not produce an ideal sine fit. None-the-less, we will continue
+with the model and attempt to extract some meaningful results.
+
+Let's plot the model against the trend data set.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}22}]:} \PY{c+c1}{\PYZsh{} Calculate set of independent variables representing the CO2 concentrations}
+         \PY{n}{y\PYZus{}sine} \PY{o}{=} \PY{n}{sine\PYZus{}fit}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{sine\PYZus{}params}\PY{o}{.}\PY{n}{x}\PY{p}{)}
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{15}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Keeling Curve \PYZhy{} Trend of \PYZdl{}CO\PYZus{}2\PYZdl{} Concentration in Maui}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{fontsize}\PY{o}{=}\PY{l+m+mi}{25}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{size}\PY{o}{=}\PY{l+m+mi}{15}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZdl{}CO\PYZus{}2\PYZdl{} Cocentration (ppm)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{size}\PY{o}{=}\PY{l+m+mi}{15}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Plot best fit curve against NOAA trend dataset}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{y\PYZus{}sine}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Sine\PYZhy{}FIt Model}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{linewidth}\PY{o}{=}\PY{l+m+mi}{4}\PY{p}{,} \PY{n}{alpha}\PY{o}{=}\PY{l+m+mf}{0.8}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ddate}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{trend}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{s}\PY{o}{=}\PY{l+m+mi}{3}\PY{p}{,} \PY{n}{c}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{red}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{NOAA Trend Data}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Add legend}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{n}{fontsize}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{large}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{borderaxespad}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{markerscale}\PY{o}{=}\PY{l+m+mi}{5}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_41_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    From the above plot we can see that the sine fit does a relatively
+decent job at following the data points. From the middle portion of the
+data it almost appears as though there is a second periodic nature to
+this curve. Including this in our curve may produce a curve that is
+tighter to the data points, however it could be considered trying to
+force the relationship, if the fluctuation is due to some random
+variable(s).
+
+The last 2 or 3 years may cause some concern, as the data significantly
+deviates from the curve. When it comes to this data fitting exercise, it
+may indicate that the relationship is more exponential in nature. When
+it comes to the world we live in, that is scary. We see an increase in
+the rate of emissions- during a time where efforts are being made to
+mitigate the emission (at least that's the impression I get from the
+media).
+
+Returning our attention to the chi-square values; let's print the values
+obtained and compare.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}23}]:} \PY{c+c1}{\PYZsh{} Define a dataframe to display the results of the chi\PYZhy{}square values}
+         \PY{c+c1}{\PYZsh{} calculated for each fit model}
+         \PY{n}{df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{p}{\PYZob{}}
+             \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Chi\PYZhy{}Square}\PY{l+s+s1}{\PYZsq{}} \PY{p}{:} \PY{p}{[}\PY{n}{NOAA\PYZus{}params}\PY{o}{.}\PY{n}{fun}\PY{p}{,} \PY{n}{periodic\PYZus{}params}\PY{o}{.}\PY{n}{fun}\PY{p}{,} \PY{n}{sine\PYZus{}params}\PY{o}{.}\PY{n}{fun}\PY{p}{]}\PY{p}{,}
+             \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Model}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Linear}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Cosine}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Sine}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}
+             \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Date}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ALL}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{2000}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ALL}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         \PY{p}{\PYZcb{}}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{df}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+   Chi-Square  Date   Model
+0   11.937521   ALL  Linear
+1    0.328017  2000  Cosine
+2    1.084752   ALL    Sine
+
+    \end{Verbatim}
+
+    As this is my introduction to chi-square values have little frame of
+reference however these values are consistent with my understanding
+to-date. The linear fit was perhaps not the best model for the data,
+since there is a rather evident curve to the trend. The result is
+\(\chi^2=11.94\)
+
+On the other end of the spectrum we have \(\chi^2=0.33\) for the cosine
+fit over the course of a single year. With only a few data points it is
+not surprising that the value is not closer to the ideal value of one.
+The fact that it is less than one raised some concern, and it was
+concluded this was produced due to the method we used to normalize the
+chi-square sum (by dividing by number of data points). Down the line, if
+I am to further my curve fitting knowledge, it is necessary to
+investigate better ways of normalizing the chi-square.
+
+Finally, fitting the trend data to a sinusoidal curve was more of an
+exercise of trial and error. The parameter estimates were adjusted until
+the lowest chi-square was produced, \(\chi^2=1.08\). This looks great
+upon initial inspection but recall that there was a little bit of
+confusion when calling minimize on this model. Uneducated speculation
+will serve little purpose here, so let's go ahead and compare our model
+that one found online.
+
+A quick visit to:
+http://greenphysicist2.blogspot.ca/2010/02/atmospheric-carbon-dioxide-levels.html
+will reveal that the author of this report has concluded that by the
+year 2050, the \(CO_2\) concentration levels at Mauna Loa Observatory
+will be approximately \(550\, ppm\). Using our model, we can extrapolate
+to 2050 and produce an expectation of our own.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}24}]:} \PY{n}{expected} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n}{sine\PYZus{}fit}\PY{p}{(}\PY{l+m+mi}{2050}\PY{p}{,} \PY{n}{sine\PYZus{}params}\PY{o}{.}\PY{n}{x}\PY{p}{)}\PY{p}{)}
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Extrapolated carbon\PYZhy{}dioxide concentration in the year 2050: }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{expected}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ppm}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Extrapolated carbon-dioxide concentration in the year 2050:  455 ppm
+
+    \end{Verbatim}
+
+    The cosine model we constructed predicts a \(CO_2\) concentration that
+is roughly 100 ppm lower than that of the model compared. This is not
+surprising as the author used an exponential model to forecast this data
+point. Given the last few years, the exponential model is not all that
+unrealistic.
+
+Analyzing this data is scary. It is one thing to see how the IT and
+computational speeds are increasing at an exponential rate. We have an
+entirely different thought process when we look at how our "progress" is
+altering our environment.
+
+    \subsection{Conclusion}\label{conclusion}
+
+Using the Lagrange interpolation polynomial, we produced values for the
+missing data that were very similar to the numbers in the average data
+set. Unfortunately, when attempting to remove the seasonal fluctuations,
+it was noted that while the fluctuations were smaller in magnitude, they
+were still there. Without a doubt, a more advanced algorithm would be
+required to make the trend curve as "smooth" as the NOOA trend data. I
+still feel going through this exercise was valuable, in that it made my
+introduction to data analysis more involved. I find this material
+extremely interesting, as it is a good combination of coding,
+mathematics, statistics, and awareness of what you are trying to
+accomplish.
+
+The method of constructing a fit model and then minimizing the
+associated chi-square value, produced visually pleasing results. The
+linear fit appeared "centered" on the data points, and the periodic fit
+appeared to represent the overall fluctuations of the data. When
+attempting to fit a curve to the entire trend data set, it was noted
+that different guesses for the parameters would result in different
+return values. Furthermore, each curve plotted with these varied
+parameters appeared to fit the data quite nicely. I believe this
+demonstrates the complexity involved with curve fitting- it is extremely
+difficult to conclude that the model fits the data. If we apply more
+knowledge gained from the lab; presumably it is only correct to say that
+the curve fits the data within a given tolerance, or window.
+
+I will make a couple comments to conclude PHYS 381. I believe this was a
+course that fit the saying "you get out, what you put into it". I am
+blown away at how much I learned here. I started the semester not
+knowing any python, so to be able to create this document is impressive
+to myself. My old boss had a saying (paraphrased here); "Nonsense in,
+nonsense out". At the start of the semester if I had applied that to my
+expectations of computational physics, I would have guessed that if all
+the input was proper, then the computer would output the correct answer.
+Clearly, this is not the case. A significant amount of attention must be
+applied to interpretation of the output. I can only imagine that this
+concept will be applied at all levels moving forward.
+
+I am looking forward to PHYS 481 - see you in the fall semester!
+
+Ken
+
+    \subsection{References}\label{references}
+
+{[}1{]} Computational Physics, Problem Solving with Python, 3e, Rubin H.
+Landau, Manuael J. Paez, and Cristian C. Bordeianu
+
+{[}2{]}
+http://mathworld.wolfram.com/LagrangeInterpolatingPolynomial.html
+
+{[}3{]} co2\_mm\_mlo.txt Sourced from:
+ftp://aftp.cmdl.noaa.gov/products/trends/co2/co2\_mm\_mlo.txt
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
