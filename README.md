@@ -1,5 +1,5 @@
 # PHYS-private-
-PHYS ### L01/02- (Winter 2018) - Computational Physics I
+Computational Physics I
 
 Course Outcomes
 1. Analyse physical and astrophysical problems from the computational viewpoint. Construct mathematical and
