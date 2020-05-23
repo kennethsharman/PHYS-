@@ -1,4 +1,3 @@
-# PHYS-private-
 Computational Physics I
 
 Course Outcomes
